@@ -10,7 +10,14 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  Widget activeScreen = const StartSceen(switchScreen);
+  Widget? activeScreen;
+  //the ? tells Dart that the varaible may contain a Widget or null
+
+  @override
+  void initState() {
+    activeScreen = StartSceen(switchScreen);
+    super.initState();
+  }
 
   void switchScreen() {
     setState(() {
