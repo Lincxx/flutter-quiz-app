@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/questions_screen.dart';
+import 'package:quiz_app/results_screen.dart';
 import 'package:quiz_app/start_screen.dart';
+import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/data/questions.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
 
   @override
-  State<Quiz> createState() => _QuizState();
+  State<Quiz> createState() {
+    return _QuizState();
+  }
 }
 
 class _QuizState extends State<Quiz> {
@@ -25,32 +28,40 @@ class _QuizState extends State<Quiz> {
 
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        print(selectedAnswers); // = [];
-        activeScreen = 'start-screen';
+        selectedAnswers = [];
+        activeScreen = 'result-screen';
       });
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
+    Widget screenWidget = StartSceen(switchScreen);
+
+    if (activeScreen == 'questions-screen') {
+      screenWidget = QuestionsScreen(
+        onSelectedAnswer: chooseAnswer,
+      );
+    }
+
+    if (activeScreen == 'result-screen') {
+      screenWidget = const ResultScreen();
+    }
+
     return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 78, 12, 151),
-                Color.fromARGB(255, 107, 17, 177),
+                Color.fromARGB(255, 78, 13, 151),
+                Color.fromARGB(255, 107, 15, 168),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
-          child: activeScreen == 'start-screen'
-              ? StartSceen(switchScreen)
-              : QuestionsScreen(
-                  onSelectedAnswer: chooseAnswer,
-                ),
+          child: screenWidget,
         ),
       ),
     );
