@@ -31,7 +31,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               height: 30,
             ),
             //to get around the Iterable issue we can use the spread operator.
-            ...currentQuestion.answers.map((answer) {
+            ...currentQuestion.getShuffledAnswer().map((answer) {
               return AnswerButton(
                 answerText: answer,
                 onTap: () {},
