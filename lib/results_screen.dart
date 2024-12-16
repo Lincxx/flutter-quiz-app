@@ -22,6 +22,22 @@ class ResultScreen extends StatelessWidget {
     return summary;
   }
 
+//this is a get method
+  // List<Map<String, Object>> get SummaryData {
+  //   final List<Map<String, Object>> summary = [];
+
+  //   for (var i = 0; i < chosenAnswers.length; i++) {
+  //     summary.add({
+  //       'question_index': i,
+  //       'question': questions[i].text,
+  //       'correct_answer': questions[i].answers[0],
+  //       'user_answer': chosenAnswers[i]
+  //     });
+  //   }
+
+  //   return summary;
+  // }
+
   @override
   Widget build(BuildContext context) {
     final summaryData = getSummartData();
@@ -29,6 +45,10 @@ class ResultScreen extends StatelessWidget {
     final numberCorrectQuestions = summaryData.where((data) {
       return data['user_answer'] == data['correct_answer'];
     }).length;
+
+    //arrow function example 
+    final numberCorrectQuestions2 = summaryData.where((data) => data['user_answer'] == data['correct_answer']
+    ).length;
 
     return SizedBox(
       width: double.infinity,
